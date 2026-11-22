@@ -19,7 +19,7 @@ const COLOURS = {
   progress: '#e6e6ee',  // progress day: small star
   bigArm: '#ffd08a',    // big day: star arms
   bigCore: '#ffe0a8',   // big day: star centre
-  future: '#1c1c24',    // days that haven't happened yet: barely visible
+  future: '#2e2e38',    // days that haven't happened yet: dim but visible
 };
 const BIG_DAY = 3;      // GitHub level needed for a "big day" star (3–4 = lots)
 
@@ -46,7 +46,7 @@ loadDays().then(days => {
 
     // Future day: barely-there dot
     if (level === null) {
-      px(x, y, 1.2, COLOURS.future);
+      px(x, y, 1.5, COLOURS.future);
       return;
     }
 
