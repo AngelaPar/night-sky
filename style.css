@@ -1,0 +1,72 @@
+/* ===== Palette (matches my portfolio) ===== */
+:root {
+  --bg: #000;            /* space black */
+  --text: #e6e6ee;       /* main text + progress stars */
+  --muted: #9696a2;      /* secondary text */
+  --dim: #6e6e7a;        /* dimmer text */
+  --faint: #5a5a66;      /* rest-day dots */
+  --accent: #ffb547;     /* amber accent (subtitle, button border) */
+  --warm: #ffd08a;       /* big-day star arms */
+  --warm-core: #ffe0a8;  /* big-day star centre */
+}
+
+/* ===== Base ===== */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;   /* centre everything on the page */
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+}
+
+main { width: min(900px, 92vw); }  /* max 900px wide, shrinks on small screens */
+p { margin: 0; }
+
+/* ===== Header text ===== */
+.name { font-size: 14px; letter-spacing: .35em; }
+.sub  { margin-top: 10px; font-size: 12px; letter-spacing: .25em; color: var(--accent); }
+.tag  { margin-top: 6px; font-size: 12px; letter-spacing: .1em; color: var(--muted); }
+.lit  { margin-top: 18px; font-size: 12px; letter-spacing: .2em; color: var(--text); }  /* "X / Y DAYS LIT" */
+
+/* ===== The sky (SVG drawn by sky.js) ===== */
+#sky { width: 100%; margin-top: 10px; }
+
+/* ===== Footer: legend (left) + button (right) ===== */
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 18px;
+}
+
+.legend {
+  list-style: none; margin: 0; padding: 0;
+  font-size: 11px; letter-spacing: .25em; color: var(--muted);
+}
+.legend li { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+
+/* Small round dots for the legend + button */
+.dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+.dot.rest     { background: var(--faint); }
+.dot.progress { background: var(--text); }
+.dot.big      { background: var(--warm); }
+.dot.accent   { background: var(--accent); }
+
+/* "View on GitHub" button */
+.btn {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px;
+  border: 1px solid var(--accent);
+  color: var(--warm);
+  font-size: 11px; letter-spacing: .3em;
+  text-decoration: none;
+}
+.btn:hover { background: rgba(255, 181, 71, .08); }  /* faint amber glow on hover */
+
+/* ===== Twinkle animation for big-day stars ===== */
+@keyframes twinkle { 50% { opacity: .45; } }
+.big-star { animation: twinkle 3s ease-in-out infinite; }
