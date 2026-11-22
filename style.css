@@ -31,6 +31,14 @@ main {
   grid-template-rows: 1fr auto 1fr;
 }
 
+p { margin: 0; }
+
+/* ===== Header text ===== */
+.name { font-size: 14px; letter-spacing: .35em; }
+.sub  { margin-top: 10px; font-size: 12px; letter-spacing: .25em; color: var(--accent); }
+.tag  { margin-top: 6px; font-size: 12px; letter-spacing: .1em; color: var(--muted); }
+.lit  { margin-top: 18px; font-size: 12px; letter-spacing: .2em; color: var(--text); }  /* "X / Y DAYS LIT" */
+
 header { align-self: end; padding-bottom: 18px; }   /* hugs the sky from above */
 
 #sky { width: 100%; }
