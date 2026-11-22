@@ -4,8 +4,10 @@ async function loadDays() {
   try {
     const res = await fetch('contributions.json');
     const data = await res.json();
-    const today = new Date().toISOString().slice(0, 10);
-    return data.filter(d => d.date <= today).map(d => d.level);
+    const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Pacific/Auckland' });
+    const days = data.map(d => (d.date <= today ? d.level : null));
+    while (days.length < 365) days.push(null);   // pad to a full year
+    return days;
   } catch {
     return Array.from({ length: 365 }, () => Math.floor(Math.random() * 5));
   }
@@ -17,6 +19,7 @@ const COLOURS = {
   progress: '#e6e6ee',  // progress day: small star
   bigArm: '#ffd08a',    // big day: star arms
   bigCore: '#ffe0a8',   // big day: star centre
+  future: '#1c1c24',    // days that haven't happened yet: barely visible
 };
 const BIG_DAY = 3;      // GitHub level needed for a "big day" star (3–4 = lots)
 
@@ -40,6 +43,12 @@ loadDays().then(days => {
   days.forEach((level, i) => {
     const x = 10 + Math.floor(i / 7) * 11.9;
     const y = 8 + (i % 7) * 16;
+
+    // Future day: barely-there dot
+    if (level === null) {
+      px(x, y, 1.2, COLOURS.future);
+      return;
+    }
 
     // Rest day: tiny faint dot
     if (level === 0) {
@@ -67,6 +76,6 @@ loadDays().then(days => {
   });
 
   // ===== "X / Y DAYS LIT" counter =====
-  document.getElementById('lit').textContent =
-    `${lit} / ${days.length} DAYS LIT · ${Math.round((lit / days.length) * 100)}%`;
+  const sofar = days.filter(l => l !== null).length;
+  document.getElementById('lit').textContent = `${lit} / ${sofar} DAYS LIT · ${Math.round((lit / sofar) * 100)}%`;
 });
