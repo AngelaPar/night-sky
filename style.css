@@ -25,7 +25,7 @@ body {
 
 /* Three rows: header | sky | footer. The sky sits dead centre */
 main {
-  width: min(900px, 92vw);
+  width: min(1200px, 94vw);   
   height: 100vh;
   display: grid;
   grid-template-rows: 1fr auto 1fr;
